@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>인사관리 시스템 Ver 2.0</title>
+<style type="text/css">
+*{padding:0;margin:0}
+.logo{padding:40px 0; text-align:center; color:#c85179; background-color:#fdeff2}
+.navi{padding:10px 0; overflow:hidden;background-color:#e198b4}
+.navi ul, li{padding:0 10px; float:left; list-style:none}
+a{padding:20px; text-decoration:none; color:#fff}
+
+.section{color:#e198b4}
+.title{text-align:center;}
+.content{margin:0}
+.content table{margin:0 auto}
+.content table th,td{text-align:center; color:#e198b4;border:1px solid #c85179}
+.btn_group{text-align:center;}
+
+.footer{padding:20px;background-color:#fdeff2}
+.footer p{text-align:center;color:#c85179}
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+<div class="header">
+<header>
+	<h1 class="logo">인사관리 시스템 Ver 2.0</h1>
+	<nav class="navi">
+		<ul>
+			<li><a href="insert.jsp">사원등록</a></li>
+			<li><a href="list.jsp">사원조회</a></li>
+			<li><a href="modify.jsp">사원정보변경</a></li>
+			<li><a href="view.jsp">부서별 사원현황</a></li>
+			<li><a href="select.jsp">퇴사처리</a></li>			
+			<li><a href="index.jsp">홈으로</a></li>			
+		</ul>
+	</nav>
+</header>
+</div>
+<div class="section">
+<section>
+	<h2 class="title">인사관리 시스템</h2>
+	<div class="content">
+		<br>다음은 인사관리 프로그램이다.<br>
+		<br>1.인사관리 데이터베이스를 구축한다<br>
+		<br>2.사원정보를 저장할 테이블(personnel)을 생성한다<br>
+		<br>3.샘플 사원정보 데이터를 삽입한다<br>
+		<br>4.업무 요건에 맞는 화면을 만든다.<br>
+		<br>5.등록,수정,검색,삭제 프로그램을 만든다<br>
+		<br><br>
+	</div>
+</section>
+</div>
+<br><br>
+<div class="footer">
+<footer>
+	<p>HRDKOREA Copyright@2016 All rights reserve. Human Resources Development Service of Korea</p>
+</footer>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+*{padding:0;margin:0}
+a{padding:20px;}
+.logo{padding:40px 0;}
+.navi{padding:10px 0;}
+.navi ul, li{padding:0 10px;}
+
+.section{}
+.title{}
+.content{margin:0}
+.content table{margin:0 auto}
+.content table th,td{}
+.btn_group{}
+
+.footer{padding:20px;}
+.footer p{}
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+<div class="header">
+<header>
+	<h1 class="logo"></h1>
+	<nav class="navi">
+		<ul>
+			<li><a href=""></a></li>
+			<li><a href=""></a></li>
+			<li><a href=""></a></li>
+			<li><a href=""></a></li>			
+		</ul>
+	</nav>
+</header>
+</div>
+<div class="section">
+<section>
+	<h2 class="title"></h2>
+	<div class="content">
+		<form name="" method="post" action="">
+			<table>
+				<tr>
+					<th></th>
+					<td><input type="text" name="" value="">
+					</td>
+				</tr>
+				<tr>
+					<td	colspan="2" class="btn_group">
+						<input type="button" value="" onClick="">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</section>
+</div>
+<div class="footer">
+<footer>
+	<p></p>
+</footer>
+</div>
+
+
+</body>
+</html>

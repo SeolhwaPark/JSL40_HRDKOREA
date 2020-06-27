@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import ="java.util.* , model.*"%>
+
+<%
+	request.setCharacterEncoding("utf-8");
+	DAO dao = DAO.getInstance();
+	
+	int sawon = Integer.parseInt(request.getParameter("sawon"));
+	String name = request.getParameter("name");
+	
+	int row = dao.delete(sawon, name);
+	
+	if(row == 0){
+		out.print("<script>alert('" + name + " 사원과 일치하는 정보가 없습니다.\n다시 확인하시기 바랍니다.');history.back();</script>");
+	
+	}else{		
+		out.print("<script>alert('" + name + " 사원의 퇴사처리가 완료되었습니다.');</script>");
+	}
+		response.sendRedirect("index.jsp");
+	
+
+%>

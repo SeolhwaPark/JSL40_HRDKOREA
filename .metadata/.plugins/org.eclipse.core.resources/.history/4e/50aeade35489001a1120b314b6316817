@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.* , model.*"%>  
+
+<%
+	DAO dao = DAO.getInstance();
+	List<VO> list = dao.list();
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>(과정평가형 정보처리산업기사)학생관리 프로그램 ver 1.0</title>
+
+<style type="text/css">
+*{padding:0;margin:0}
+.logo{padding:40px 0;text-align:center;}
+.navi{padding:10px 0;overflow:hidden}
+.navi ul, li{padding:0 10px;float:left;list-style:none}
+a{padding:20px 0;text-decoration:none; }
+
+.title{text-align:center;}
+.content{margin:0}
+.content table{margin:0 auto}
+.content table th, td{text-align:center;border: 1px solid}
+.btn_group{text-align:center;}
+
+.footer{padding:20px 0;}
+.footer p{text-align:center;}
+</style>
+<script type="text/javascript">
+</script>
+
+</head>
+<body>
+
+<div class="header">
+	<header>
+		<h1 class="logo">(과정평가형 정보처리산업기사)학생관리 프로그램 ver 1.0</h1>
+		<nav class="navi">
+			<ul>
+				<li><a href="insert.jsp">학생정보등록</a></li>
+				<li><a href="list.jsp">학생정보조회</a></li>
+				<li><a href="input.jsp">성적정보등록</a></li>
+				<li><a href="view.jsp">학생성적조회</a></li>
+				<li><a href="index.jsp">홈으로</a></li>
+			</ul>
+		</nav>
+	</header>
+</div>
+<div class="section">
+	<section>
+		<h2 class="title">학생정보 조회</h2>
+		<div class="content">
+		
+				<table>
+					<tr>
+						<th>학생번호</th>
+						<th>학생이름</th>
+						<th>전화번호</th>
+						<th>성별</th>
+						<th>생년월일</th>
+						<th>가입일자</th>
+					</tr>
+				<%
+					for(int x=0;x<list.size();x++){				
+				%>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				<%
+					}
+				%>
+				</table>
+			<br><br>
+		</div>
+		
+	</section>
+</div>
+<div class="footer">
+	<footer>
+		<p>HRDKOREA Copyright@2016 All rights reserve. Human Resources Development Service of Korea</p>
+	</footer>
+</div>
+</body>
+</html>

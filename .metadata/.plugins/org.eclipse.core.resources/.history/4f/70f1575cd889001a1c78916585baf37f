@@ -1,0 +1,78 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DAO {
+	private DAO() {}
+	private static DAO instance = new DAO();
+	public static DAO getInstance() throws Exception{
+		return instance;
+	}
+	
+	public static Connection getConnection() throws Exception{
+		Class.forName("oracle.jdbc.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost1521/xe","hrdkorea","1234");
+		return con;
+	}
+	
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	public int max() {
+		String query="select sawon from tbl_person order by sawon desc";
+		int row = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			row = pstmt.executeUpdate();
+			if(rs.next()) {
+				row = rs.getInt("sawon");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	public int insert(VO vo) {
+		String query="insert into tbl_person(sawon,name,duty,phone,indate,outdate,dcode) values(?,?,?,?,?,?,?);";
+		int row = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, vo.getSawon());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getDuty());
+			pstmt.setString(4, vo.getPhone());
+			pstmt.setString(5, vo.getIndate());
+			pstmt.setString(6, vo.getOutdate());
+			pstmt.setString(7, vo.getDcode());
+			row = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
+}

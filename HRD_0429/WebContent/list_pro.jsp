@@ -1,0 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ page import ="java.util.* , model.*"%>
+
+<%
+	DAO dao = DAO.getInstance();
+	int sawon = Integer.parseInt(request.getParameter("sawon"));
+	VO vo = dao.sawonList(sawon);
+	
+	if(vo == null){
+%>
+
+<script type"text/javascript">
+	alert("등록된 사원이 없습니다");
+	history.back();
+</script>
+
+<%
+
+}else{
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>인사관리 시스템 Ver 2.0</title>
+<style type="text/css">
+*{padding:0;margin:0}
+.logo{padding:40px 0; text-align:center; color:#c85179; background-color:#fdeff2}
+.navi{padding:10px 0; overflow:hidden;background-color:#e198b4}
+.navi ul, li{padding:0 10px; float:left; list-style:none}
+a{padding:20px; text-decoration:none; color:#fff}
+
+.section{color:#e198b4}
+.title{text-align:center;padding:20px}
+.content{margin:0}
+.content table{margin:0 auto}
+.content table th,td{text-align:center; color:#e198b4;border:1px solid #c85179}
+.btn_group{text-align:center;}
+
+.footer{padding:20px;background-color:#fdeff2}
+.footer p{text-align:center;color:#c85179}
+
+</style>
+<script type="text/javascript">
+function send() {
+	location.href="index.jsp";
+}
+</script>
+</head>
+<body>
+
+<div class="header">
+<header>
+	<h1 class="logo">인사관리 시스템 Ver 2.0</h1>
+	<nav class="navi">
+		<ul>
+			<li><a href="insert.jsp">사원등록</a></li>
+			<li><a href="list.jsp">사원조회</a></li>
+			<li><a href="modify.jsp">사원정보변경</a></li>
+			<li><a href="view.jsp">부서별 사원현황</a></li>
+			<li><a href="select.jsp">퇴사처리</a></li>			
+			<li><a href="index.jsp">홈으로</a></li>			
+		</ul>
+	</nav>
+</header>
+</div>
+<div class="section">
+<section>
+	<h2 class="title">인사관리 시스템 직원정보 조회 화면</h2>
+	<div class="content">
+			<table>
+				<tr>
+					<th colspan="7" class="btn_group">직원 정보 조회 결과</th>				
+				</tr>
+				<tr>
+					<th>사원번호</th>
+					<th>사원명</th>
+					<th>직책</th>
+					<th>연락처</th>
+					<th>입사일자</th>
+					<th>퇴사일자</th>
+					<th>부서코드</th>
+				</tr>
+				<tr>
+					<td><%= vo.getSawon() %>
+					</td>
+					<td><%= vo.getName() %>
+					</td>
+					<td><%= vo.getDuty() %>
+					</td>
+					<td><%= vo.getPhone() %>
+					</td>
+					<td><%= vo.getIndate() %>
+					</td>
+					<td><%= vo.getOutdate() %>
+					</td>
+					<td><%= vo.getDcode() %>
+					</td>
+				</tr>
+				<tr>
+					<td	colspan="7" class="btn_group">
+						<input type="button" value="확인" onClick="send()">
+					</td>
+				</tr>
+			</table>
+	</div>
+</section>
+</div>
+<br><br>
+<div class="footer">
+<footer>
+	<p>HRDKOREA Copyright@2016 All rights reserve. Human Resources Development Service of Korea</p>
+</footer>
+</div>
+
+
+</body>
+</html>
+
+<%
+	}
+%>

@@ -1,0 +1,12 @@
+package model;
+
+public class VO {
+	private int sawon;
+	private String name;
+	private String duty;
+	private String phone;
+	private String indate;
+	private String outdate;
+	private String dcode;
+	
+}

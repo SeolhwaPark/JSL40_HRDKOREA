@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.* , model.*"%>  
+
+<%
+	request.setCharacterEncoding("utf-8");
+	DAO dao = DAO.getInstance();
+	VO vo = new VO();
+	
+	vo.setHakbun(request.getParameter("hakbun"));
+	vo.setKor(Integer.parseInt(request.getParameter("kor")));	
+	vo.setEng(Integer.parseInt(request.getParameter("eng")));	
+	vo.setMat(Integer.parseInt(request.getParameter("mat")));	
+	int row = dao.input(vo);
+	response.sendRedirect("input.jsp");
+
+%>

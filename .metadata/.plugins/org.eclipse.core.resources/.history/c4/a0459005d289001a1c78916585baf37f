@@ -1,0 +1,20 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DAO {
+	private DAO() {}
+	private static DAO instance = new DAO();
+	public static DAO getInstance() throws Exception{
+		return instance;
+	}
+	
+	public static Connection getConnection() throws Exception{
+		Class.forName("oracle.jdbc.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost1521/xe","hrdkorea","1234");
+		return con;
+	}
+	
+	
+}

@@ -1,0 +1,200 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DAO {
+	private DAO() {}
+	private static DAO instance = new DAO();
+	public static DAO getInstance() throws Exception{
+		return instance;
+	}
+	public static Connection getConnection() throws Exception{
+		Class.forName("oracle.jdbc.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe","hrdkorea","1234");
+		return con;
+	}
+	
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	public int insert(VO vo) {
+		String query="insert into tbl_student01(hakbun,name,phone1,phone2,phone3,birth,gender,regdate) "
+				+ "values(?,?,?,?,?,?,?,?)";
+		int row =0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, vo.getHakbun());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getPhone1());
+			pstmt.setString(4, vo.getPhone2());
+			pstmt.setString(5, vo.getPhone3());
+			pstmt.setString(6, vo.getBirth());
+			pstmt.setString(7, vo.getGender());
+			pstmt.setString(8, vo.getRegdate());
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	public int input(VO vo) {
+		String query="insert into tbl_score01(hakbun,kor,eng,mat) "
+				+ "values(?,?,?,?)";
+		int row =0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, vo.getHakbun());
+			pstmt.setInt(2, vo.getKor());
+			pstmt.setInt(3, vo.getEng());
+			pstmt.setInt(4, vo.getMat());
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
+	public VO select(String hakbun) {
+		String query="select a.hakbun, b.kor, b.eng, b.mat from tbl_student01 a, tbl_score01 b where a.hakbun = b.hakbun";
+		VO vo = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setHakbun(rs.getString("hakbun"));
+				vo.setKor(rs.getInt("kor"));
+				vo.setEng(rs.getInt("eng"));
+				vo.setMat(rs.getInt("mat"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
+	}
+	public VO selectList(String hakbun) {
+		String query="select * from tbl_student01 where hakbun=?";
+		VO vo = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, hakbun);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new VO();
+				vo.setHakbun(rs.getString("hakbun"));
+				vo.setName(rs.getString("name"));
+				vo.setPhone1(rs.getString("phone1"));
+				vo.setPhone2(rs.getString("phone2"));
+				vo.setPhone3(rs.getString("phone3"));
+				vo.setGender(rs.getString("gender"));
+				vo.setBirth(rs.getString("birth"));
+				vo.setRegdate(rs.getString("regdate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
+	}
+	
+	public List<VO> list() {
+		String query="select * from tbl_student01";
+		List<VO> list = new ArrayList<VO>();
+		VO vo = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new VO();
+				vo.setHakbun(rs.getString("hakbun"));
+				vo.setName(rs.getString("name"));
+				vo.setPhone1(rs.getString("phone1"));
+				vo.setPhone2(rs.getString("phone2"));
+				vo.setPhone3(rs.getString("phone3"));
+				vo.setGender(rs.getString("gender"));
+				vo.setBirth(rs.getString("birth"));
+				vo.setRegdate(rs.getString("regdate"));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(con!=null)con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+//	public int max() {
+//		String query="select hakbun from tbl_score01 order by hakbun desc";
+//		int row =0;
+//		try {
+//			con = getConnection();
+//			pstmt = con.prepareStatement(query);
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				row = Integer.parseInt(rs.getString("hakbun"));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				if(rs!=null)rs.close();
+//				if(pstmt!=null)pstmt.close();
+//				if(con!=null)con.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return row;
+//	}
+	
+	
+}
